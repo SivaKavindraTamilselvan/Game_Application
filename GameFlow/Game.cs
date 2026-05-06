@@ -38,7 +38,14 @@ public class WordGuessGame
                 Console.WriteLine("---------------------------------------------------");
                 if (guessed_words.Count > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine();
+                    Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine("Previously Guessed Words");
+                    Console.WriteLine("---------------------------------------------------");
+                    Console.WriteLine();
+                    Console.ResetColor();
+
                     int count = 1;
                     foreach (var item in guessed_words)
                     {
@@ -46,16 +53,20 @@ public class WordGuessGame
                         count++;
                     }
                 }
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine();
+                Console.WriteLine("---------------------------------------------------");
                 Console.WriteLine("Enter the Words Guessed");
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine();
+                Console.ResetColor();
+
                 string guessed_word = Console.ReadLine() ?? "";
                 guessed_word = guessed_word.ToUpper();
                 validator.ValidateFunction(guessed_word, guessed_words);
 
-
-
                 string actual = feedback.GetFeedback(guessed_word, secretWord);
                 feedback.PrintColoredFeedback(guessed_word, actual);
-                Console.WriteLine($"Your Result - {actual}");
                 foreach (var c in actual)
                 {
                     if (c == 'G')
