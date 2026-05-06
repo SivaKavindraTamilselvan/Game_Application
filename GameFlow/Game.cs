@@ -75,7 +75,11 @@ public class WordGuessGame
         }
         ScoreCaluculator(attempt, won,score);
         Console.WriteLine("Enter 1 To Replay.");
-        
+        int choice = Convert.ToInt32(Console.ReadLine());
+        if (choice == 1)
+        {
+            Start();
+        }
     }
 
     public void ScoreCaluculator(int attempt, bool won,int score)
