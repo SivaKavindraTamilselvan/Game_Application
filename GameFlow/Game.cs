@@ -20,9 +20,17 @@ public class WordGuessGame
     {
         secretWord = generator.GetRandomWord();
         Console.WriteLine(secretWord);
+        
         int score = 0;
         int attempt = 1;
         bool won = false;
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine("=================Word Game=========================");
+        Console.WriteLine("---------------------------------------------------");
+        Console.ResetColor();
+        
         while (attempt <= max_attempt)
         {
             try
