@@ -22,7 +22,7 @@ public class Game
         while (true)
         {
             secretWord = generator.GetRandomWord();
-            Console.WriteLine(secretWord);
+            //Console.WriteLine(secretWord);
 
             int score = 0;
             int attempt = 1;
