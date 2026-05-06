@@ -1,6 +1,6 @@
-using Game.Exceptions;
+using WordGame.Exceptions;
 
-namespace Game.Validation;
+namespace WordGame.Validation;
 
 public class WordGuessValidation
 {

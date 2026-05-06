@@ -1,4 +1,4 @@
-namespace Game.IO;
+namespace WordGame.IO;
 
 public class InputsAndOutputs
 {

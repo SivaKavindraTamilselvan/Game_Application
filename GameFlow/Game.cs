@@ -1,11 +1,11 @@
-using Game.Exceptions;
-using Game.Validation;
-using Game.WordGenerator;
-using Game.Feedback;
-using Game.Scores;
-using Game.IO;
+using WordGame.Exceptions;
+using WordGame.Validation;
+using WordGame.WordGenerator;
+using WordGame.Feedback;
+using WordGame.Scores;
+using WordGame.IO;
 
-namespace Game.GameFlow;
+namespace WordGame.GameFlow;
 
 public class WordGuessGame
 {

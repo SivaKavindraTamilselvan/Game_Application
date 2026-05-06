@@ -1,6 +1,6 @@
-namespace Game.Feedback;
+namespace WordGame.Feedback;
 
-public class FeedbackGenerator
+public partial class FeedbackGenerator
 {
     public string GetFeedback(string guessed_word, string actual_word)
     {
@@ -41,38 +41,5 @@ public class FeedbackGenerator
         }
         string final_result = new string(result);
         return final_result;
-    }
-
-    public void PrintColoredFeedback(string guess, string feedback)
-    {
-        Console.WriteLine("---------------------------------------------------");
-        for (int i = 0; i < guess.Length; i++)
-        {
-            if (feedback[i] == 'G')
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            else if (feedback[i] == 'Y')
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
-
-            Console.Write(guess[i] + "  ");
-        }
-        Console.ResetColor();
-        Console.WriteLine();
-
-        foreach (char c in feedback)
-        {
-            Console.Write(c + "  ");
-        }
-
-        Console.WriteLine();
-        Console.ResetColor();
-        Console.WriteLine("---------------------------------------------------");
     }
 }

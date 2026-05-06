@@ -1,4 +1,4 @@
-namespace Game.Scores;
+namespace WordGame.Scores;
 
 public class Score
 {

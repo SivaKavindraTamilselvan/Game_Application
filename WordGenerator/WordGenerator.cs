@@ -1,4 +1,4 @@
-namespace Game.WordGenerator
+namespace WordGame.WordGenerator
 {
     public class WordGeneratorClass
     {
