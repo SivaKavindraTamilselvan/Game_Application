@@ -15,7 +15,6 @@ public class WordGuessGame
     WordGeneratorClass generator = new WordGeneratorClass();
     FeedbackGenerator feedback = new FeedbackGenerator();
 
-    List<string> guessed_words = new List<string>();
     public void Start()
     {
         secretWord = generator.GetRandomWord();
@@ -24,6 +23,7 @@ public class WordGuessGame
         int score = 0;
         int attempt = 1;
         bool won = false;
+         List<string> guessed_words = new List<string>();
 
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("---------------------------------------------------");
@@ -35,7 +35,6 @@ public class WordGuessGame
         {
             try
             {
-                Console.WriteLine("---------------------------------------------------");
                 if (guessed_words.Count > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
@@ -89,7 +88,7 @@ public class WordGuessGame
             catch (InvalidGuessException ex)
             {
                 Console.WriteLine(ex.Message);
-                attempt--;
+                continue;
             }
         }
         ScoreCaluculator(attempt, won,score);
@@ -103,21 +102,30 @@ public class WordGuessGame
 
     public void ScoreCaluculator(int attempt, bool won,int score)
     {
+        Console.WriteLine();
+        Console.WriteLine();
         Console.WriteLine("---------------------------------------------------");
         List<string> comment = new List<String> { "Genius!", "Excellent!", "Great job!", "Good work!", "Nice try!", "That was close!" };
         if (won)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Game Over! Congratulations! You Won The Game");
             int won_bonus = (max_attempt - attempt + 1) * 10;
             score = score + won_bonus;
             Console.WriteLine(comment[attempt - 1]);
+            Console.ResetColor();
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Game Over! You Lost");
             score = score - 10;
+            Console.ResetColor();
         }
+        Console.WriteLine();
         Console.WriteLine($"Final Score - {score}");
         Console.WriteLine("---------------------------------------------------");
+        Console.WriteLine();
+        Console.WriteLine();
     }
 }

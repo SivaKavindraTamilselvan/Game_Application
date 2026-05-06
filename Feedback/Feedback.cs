@@ -45,6 +45,7 @@ public class FeedbackGenerator
 
     public void PrintColoredFeedback(string guess, string feedback)
     {
+        Console.WriteLine("---------------------------------------------------");
         for (int i = 0; i < guess.Length; i++)
         {
             if (feedback[i] == 'G')
@@ -63,7 +64,6 @@ public class FeedbackGenerator
             Console.Write(guess[i] + "  ");
         }
         Console.ResetColor();
-
         Console.WriteLine();
 
         foreach (char c in feedback)
@@ -73,5 +73,6 @@ public class FeedbackGenerator
 
         Console.WriteLine();
         Console.ResetColor();
+        Console.WriteLine("---------------------------------------------------");
     }
 }
