@@ -48,7 +48,17 @@ public class WordGuessGame
                 string actual = feedback.GetFeedback(guessed_word, secretWord);
                 feedback.PrintColoredFeedback(guessed_word, actual);
                 Console.WriteLine($"Your Result - {actual}");
-                
+                foreach (var c in actual)
+                {
+                    if (c == 'G')
+                    {
+                        score = score + 10;
+                    }
+                    if (c == 'Y')
+                    {
+                        score = score + 5;
+                    }
+                }
                 if (guessed_word == secretWord)
                 {
                     won = true;
@@ -63,9 +73,28 @@ public class WordGuessGame
                 attempt--;
             }
         }
-        
+        ScoreCaluculator(attempt, won,score);
+        Console.WriteLine("Enter 1 To Replay.");
         
     }
 
-    
+    public void ScoreCaluculator(int attempt, bool won,int score)
+    {
+        Console.WriteLine("---------------------------------------------------");
+        List<string> comment = new List<String> { "Genius!", "Excellent!", "Great job!", "Good work!", "Nice try!", "That was close!" };
+        if (won)
+        {
+            Console.WriteLine("Game Over! Congratulations! You Won The Game");
+            int won_bonus = (max_attempt - attempt + 1) * 10;
+            score = score + won_bonus;
+            Console.WriteLine(comment[attempt - 1]);
+        }
+        else
+        {
+            Console.WriteLine("Game Over! You Lost");
+            score = score - 10;
+        }
+        Console.WriteLine($"Final Score - {score}");
+        Console.WriteLine("---------------------------------------------------");
+    }
 }
