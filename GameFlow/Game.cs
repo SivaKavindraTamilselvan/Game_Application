@@ -33,6 +33,8 @@ public class WordGuessGame
             Console.WriteLine("---------------------------------------------------");
             Console.ResetColor();
 
+            Console.WriteLine($"Maximum Attempts - {max_attempt}");
+
             while (attempt <= max_attempt)
             {
                 try
@@ -94,7 +96,7 @@ public class WordGuessGame
                 }
             }
             ScoreCaluculator(attempt, won, score);
-            Console.WriteLine("Enter 1 To Replay.");
+            Console.WriteLine("Enter 1 To Replay. Or any other input to exit");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice != 1)
             {
@@ -107,7 +109,7 @@ public class WordGuessGame
                 Console.WriteLine("2. For Medium");
                 Console.WriteLine("3. For Hard");
                 int level = Convert.ToInt32(Console.ReadLine());
-                while(level<1 && level>3)
+                while(level<1 || level>3)
                 {
                     Console.WriteLine("Invalid Input.Enter the correct input.");
                     level = Convert.ToInt32(Console.ReadLine());
@@ -132,6 +134,7 @@ public class WordGuessGame
     {
         Console.WriteLine();
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("---------------------------------------------------");
         List<string> comment = new List<String> { "Genius!", "Excellent!", "Great job!", "Good work!", "Nice try!", "That was close!" };
         if (won)
@@ -151,9 +154,11 @@ public class WordGuessGame
             Console.ResetColor();
         }
         Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine($"Final Score - {score}");
         Console.WriteLine("---------------------------------------------------");
         Console.WriteLine();
         Console.WriteLine();
+        Console.ResetColor();
     }
 }
