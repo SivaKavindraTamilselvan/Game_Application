@@ -2,7 +2,7 @@ namespace WordGame.Scores;
 
 public class Score
 {
-        public void ScoreCaluculator(int attempt, bool won, int score,int max_attempt)
+        public void ScoreCaluculator(int attempt, bool won, int score,int max_attempt,string secretWord)
     {
         Console.WriteLine();
         Console.WriteLine();
@@ -24,6 +24,7 @@ public class Score
             Console.WriteLine("Game Over! You Lost");
             score = score - 10;
             Console.ResetColor();
+            Console.WriteLine($"The Correct Word - {secretWord} ");
         }
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.Blue;

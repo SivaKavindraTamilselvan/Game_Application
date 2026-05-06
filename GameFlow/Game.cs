@@ -80,7 +80,7 @@ public class Game
                     continue;
                 }
             }
-            scoresCalucaltor.ScoreCaluculator(attempt, won, score, max_attempt);
+            scoresCalucaltor.ScoreCaluculator(attempt, won, score, max_attempt,secretWord);
 
             Console.WriteLine("Enter 1 To Replay. Or any other input to exit");
             int choice = Convert.ToInt32(Console.ReadLine());
