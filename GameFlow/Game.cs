@@ -118,11 +118,11 @@ public class WordGuessGame
                 }
                 else if(level == 2)
                 {
-                    max_attempt == 5;
+                    max_attempt = 5;
                 }
                 else if(level == 3)
                 {
-                    max_attempt == 4;
+                    max_attempt = 4;
                 }
             }
         }
