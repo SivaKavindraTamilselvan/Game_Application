@@ -22,6 +22,9 @@ public class WordGuessValidation
         {
             throw new InvalidGuessException("Input should be only characters not any other symbols or numbers");
         }
-        
+        if(guessed_words.Contains(guessed_word))
+        {
+            throw new InvalidGuessException("Aldready tried that word. Enter another word");
+        }
     }
 }
