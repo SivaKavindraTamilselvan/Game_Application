@@ -7,12 +7,12 @@ using WordGame.IO;
 
 namespace WordGame.GameFlow;
 
-public class WordGuessGame
+public class Game
 {
     private int max_attempt = 6;
     private string secretWord = "";
-    WordGuessValidation validator = new WordGuessValidation();
-    WordGeneratorClass generator = new WordGeneratorClass();
+    GuessValidator validator = new GuessValidator();
+    WordProvider generator = new WordProvider();
     FeedbackGenerator feedback = new FeedbackGenerator();
     Score scoresCalucaltor = new Score();
     InputsAndOutputs inputsAndOutputs = new InputsAndOutputs();

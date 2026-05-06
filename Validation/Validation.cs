@@ -2,7 +2,7 @@ using WordGame.Exceptions;
 
 namespace WordGame.Validation;
 
-public class WordGuessValidation
+public class GuessValidator
 {
     public void ValidateFunction(string guessed_word,List<string> guessed_words)
     {

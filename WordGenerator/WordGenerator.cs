@@ -1,6 +1,6 @@
 namespace WordGame.WordGenerator
 {
-    public class WordGeneratorClass
+    public class WordProvider
     {
         private List<string> words = new List<string>{"APPLE","MANGO","GRAPE","TRAIN","PLANT","BRAIN"};
         private Random random = new Random();
