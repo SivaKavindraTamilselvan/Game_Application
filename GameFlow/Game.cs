@@ -3,6 +3,7 @@ using Game.Validation;
 using Game.WordGenerator;
 using Game.Feedback;
 using Game.Scores;
+using Game.IO;
 
 namespace Game.GameFlow;
 
@@ -10,11 +11,11 @@ public class WordGuessGame
 {
     private int max_attempt = 6;
     private string secretWord = "";
-
     WordGuessValidation validator = new WordGuessValidation();
     WordGeneratorClass generator = new WordGeneratorClass();
     FeedbackGenerator feedback = new FeedbackGenerator();
     Score scoresCalucaltor = new Score();
+    InputsAndOutputs inputsAndOutputs = new InputsAndOutputs();
 
     public void Start()
     {
@@ -28,12 +29,7 @@ public class WordGuessGame
             bool won = false;
             List<string> guessed_words = new List<string>();
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("---------------------------------------------------");
-            Console.WriteLine("=================Word Game=========================");
-            Console.WriteLine("---------------------------------------------------");
-            Console.ResetColor();
-
+            inputsAndOutputs.Title();
             Console.WriteLine($"Maximum Attempts - {max_attempt}");
 
             while (attempt <= max_attempt)
@@ -42,13 +38,7 @@ public class WordGuessGame
                 {
                     if (guessed_words.Count > 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine();
-                        Console.WriteLine("---------------------------------------------------");
-                        Console.WriteLine("Previously Guessed Words");
-                        Console.WriteLine("---------------------------------------------------");
-                        Console.WriteLine();
-                        Console.ResetColor();
+                        inputsAndOutputs.PreviouslyUsedWords();
 
                         int count = 1;
                         foreach (var item in guessed_words)
@@ -57,13 +47,7 @@ public class WordGuessGame
                             count++;
                         }
                     }
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine();
-                    Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine("Enter the Words Guessed");
-                    Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine();
-                    Console.ResetColor();
+                    inputsAndOutputs.EnterWordGuessed();
 
                     string guessed_word = Console.ReadLine() ?? "";
                     guessed_word = guessed_word.ToUpper();
@@ -97,6 +81,7 @@ public class WordGuessGame
                 }
             }
             scoresCalucaltor.ScoreCaluculator(attempt, won, score, max_attempt);
+
             Console.WriteLine("Enter 1 To Replay. Or any other input to exit");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice != 1)
@@ -105,10 +90,7 @@ public class WordGuessGame
             }
             else
             {
-                Console.WriteLine("Choose Difficulty Level");
-                Console.WriteLine("1. For Easy");
-                Console.WriteLine("2. For Medium");
-                Console.WriteLine("3. For Hard");
+                inputsAndOutputs.ChooseDifficulty();
                 int level = Convert.ToInt32(Console.ReadLine());
                 while (level < 1 || level > 3)
                 {
