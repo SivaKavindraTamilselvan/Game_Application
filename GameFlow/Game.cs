@@ -2,7 +2,7 @@ using Game.Exceptions;
 using Game.Validation;
 using Game.WordGenerator;
 using Game.Feedback;
-
+using Game.Scores;
 
 namespace Game.GameFlow;
 
@@ -14,6 +14,7 @@ public class WordGuessGame
     WordGuessValidation validator = new WordGuessValidation();
     WordGeneratorClass generator = new WordGeneratorClass();
     FeedbackGenerator feedback = new FeedbackGenerator();
+    Score scoresCalucaltor = new Score();
 
     public void Start()
     {
@@ -95,7 +96,7 @@ public class WordGuessGame
                     continue;
                 }
             }
-            ScoreCaluculator(attempt, won, score);
+            scoresCalucaltor.ScoreCaluculator(attempt, won, score, max_attempt);
             Console.WriteLine("Enter 1 To Replay. Or any other input to exit");
             int choice = Convert.ToInt32(Console.ReadLine());
             if (choice != 1)
@@ -109,56 +110,24 @@ public class WordGuessGame
                 Console.WriteLine("2. For Medium");
                 Console.WriteLine("3. For Hard");
                 int level = Convert.ToInt32(Console.ReadLine());
-                while(level<1 || level>3)
+                while (level < 1 || level > 3)
                 {
                     Console.WriteLine("Invalid Input.Enter the correct input.");
                     level = Convert.ToInt32(Console.ReadLine());
                 }
-                if(level == 1)
+                if (level == 1)
                 {
                     max_attempt = 6;
                 }
-                else if(level == 2)
+                else if (level == 2)
                 {
                     max_attempt = 5;
                 }
-                else if(level == 3)
+                else if (level == 3)
                 {
                     max_attempt = 4;
                 }
             }
         }
-    }
-
-    public void ScoreCaluculator(int attempt, bool won, int score)
-    {
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine("---------------------------------------------------");
-        List<string> comment = new List<String> { "Genius!", "Excellent!", "Great job!", "Good work!", "Nice try!", "That was close!" };
-        if (won)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Game Over! Congratulations! You Won The Game");
-            int won_bonus = (max_attempt - attempt + 1) * 10;
-            score = score + won_bonus;
-            Console.WriteLine(comment[attempt - 1]);
-            Console.ResetColor();
-        }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Game Over! You Lost");
-            score = score - 10;
-            Console.ResetColor();
-        }
-        Console.WriteLine();
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine($"Final Score - {score}");
-        Console.WriteLine("---------------------------------------------------");
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.ResetColor();
     }
 }
