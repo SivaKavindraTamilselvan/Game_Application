@@ -17,90 +17,118 @@ public class WordGuessGame
 
     public void Start()
     {
-        secretWord = generator.GetRandomWord();
-        Console.WriteLine(secretWord);
-        
-        int score = 0;
-        int attempt = 1;
-        bool won = false;
-         List<string> guessed_words = new List<string>();
-
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine("---------------------------------------------------");
-        Console.WriteLine("=================Word Game=========================");
-        Console.WriteLine("---------------------------------------------------");
-        Console.ResetColor();
-        
-        while (attempt <= max_attempt)
+        while (true)
         {
-            try
+            secretWord = generator.GetRandomWord();
+            Console.WriteLine(secretWord);
+
+            int score = 0;
+            int attempt = 1;
+            bool won = false;
+            List<string> guessed_words = new List<string>();
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("---------------------------------------------------");
+            Console.WriteLine("=================Word Game=========================");
+            Console.WriteLine("---------------------------------------------------");
+            Console.ResetColor();
+
+            while (attempt <= max_attempt)
             {
-                if (guessed_words.Count > 0)
+                try
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    if (guessed_words.Count > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine();
+                        Console.WriteLine("---------------------------------------------------");
+                        Console.WriteLine("Previously Guessed Words");
+                        Console.WriteLine("---------------------------------------------------");
+                        Console.WriteLine();
+                        Console.ResetColor();
+
+                        int count = 1;
+                        foreach (var item in guessed_words)
+                        {
+                            Console.WriteLine(count + " " + item);
+                            count++;
+                        }
+                    }
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine();
                     Console.WriteLine("---------------------------------------------------");
-                    Console.WriteLine("Previously Guessed Words");
+                    Console.WriteLine("Enter the Words Guessed");
                     Console.WriteLine("---------------------------------------------------");
                     Console.WriteLine();
                     Console.ResetColor();
 
-                    int count = 1;
-                    foreach (var item in guessed_words)
-                    {
-                        Console.WriteLine(count + " " + item);
-                        count++;
-                    }
-                }
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine();
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("Enter the Words Guessed");
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine();
-                Console.ResetColor();
+                    string guessed_word = Console.ReadLine() ?? "";
+                    guessed_word = guessed_word.ToUpper();
+                    validator.ValidateFunction(guessed_word, guessed_words);
 
-                string guessed_word = Console.ReadLine() ?? "";
-                guessed_word = guessed_word.ToUpper();
-                validator.ValidateFunction(guessed_word, guessed_words);
-
-                string actual = feedback.GetFeedback(guessed_word, secretWord);
-                feedback.PrintColoredFeedback(guessed_word, actual);
-                foreach (var c in actual)
-                {
-                    if (c == 'G')
+                    string actual = feedback.GetFeedback(guessed_word, secretWord);
+                    feedback.PrintColoredFeedback(guessed_word, actual);
+                    foreach (var c in actual)
                     {
-                        score = score + 10;
+                        if (c == 'G')
+                        {
+                            score = score + 10;
+                        }
+                        if (c == 'Y')
+                        {
+                            score = score + 5;
+                        }
                     }
-                    if (c == 'Y')
+                    if (guessed_word == secretWord)
                     {
-                        score = score + 5;
+                        won = true;
+                        break;
                     }
+                    guessed_words.Add(guessed_word);
+                    attempt++;
                 }
-                if (guessed_word == secretWord)
+                catch (InvalidGuessException ex)
                 {
-                    won = true;
-                    break;
+                    Console.WriteLine(ex.Message);
+                    continue;
                 }
-                guessed_words.Add(guessed_word);
-                attempt++;
             }
-            catch (InvalidGuessException ex)
+            ScoreCaluculator(attempt, won, score);
+            Console.WriteLine("Enter 1 To Replay.");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (choice != 1)
             {
-                Console.WriteLine(ex.Message);
-                continue;
+                break;
             }
-        }
-        ScoreCaluculator(attempt, won,score);
-        Console.WriteLine("Enter 1 To Replay.");
-        int choice = Convert.ToInt32(Console.ReadLine());
-        if (choice == 1)
-        {
-            Start();
+            else
+            {
+                Console.WriteLine("Choose Difficulty Level");
+                Console.WriteLine("1. For Easy");
+                Console.WriteLine("2. For Medium");
+                Console.WriteLine("3. For Hard");
+                int level = Convert.ToInt32(Console.ReadLine());
+                while(level<1 && level>3)
+                {
+                    Console.WriteLine("Invalid Input.Enter the correct input.");
+                    level = Convert.ToInt32(Console.ReadLine());
+                }
+                if(level == 1)
+                {
+                    max_attempt = 6;
+                }
+                else if(level == 2)
+                {
+                    max_attempt == 5;
+                }
+                else if(level == 3)
+                {
+                    max_attempt == 4;
+                }
+            }
         }
     }
 
-    public void ScoreCaluculator(int attempt, bool won,int score)
+    public void ScoreCaluculator(int attempt, bool won, int score)
     {
         Console.WriteLine();
         Console.WriteLine();
