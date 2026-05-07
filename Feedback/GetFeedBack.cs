@@ -5,17 +5,20 @@ public partial class FeedbackGenerator
     public string GetFeedback(string guessed_word, string actual_word)
     {
         char[] result = new char[5];
+        //used to avoid repeated letters errors
         char[] hidden_word = actual_word.ToCharArray();
         for (int i = 0; i < 5; i++)
         {
             if (guessed_word[i] == hidden_word[i])
             {
                 result[i] = 'G';
+                //to avoid reptation of same letter comparision - symbol used as input doesnot take symbol
                 hidden_word[i] = '*';
             }
         }
         for (int i = 0; i < 5; i++)
         {
+            //check for Y and X condition
             if (result[i] == 'G')
             {
                 continue;
@@ -30,10 +33,12 @@ public partial class FeedbackGenerator
                     break;
                 }
             }
+            //if letter present
             if (check)
             {
                 result[i] = 'Y';
             }
+            //if letter not present
             else
             {
                 result[i] = 'X';

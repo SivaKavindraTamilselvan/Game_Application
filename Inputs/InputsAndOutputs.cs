@@ -2,6 +2,7 @@ namespace WordGame.IO;
 
 public class InputsAndOutputs
 {
+    //this is used for printing the console statements to avoid longer line of code
     public void Title()
     {
         Console.ForegroundColor = ConsoleColor.Blue;

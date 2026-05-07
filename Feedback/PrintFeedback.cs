@@ -2,7 +2,7 @@ namespace WordGame.Feedback;
 
 public partial class FeedbackGenerator
 {
-    
+    //for colour in the console
     public void PrintColoredFeedback(string guess, string feedback)
     {
         Console.WriteLine("---------------------------------------------------");
