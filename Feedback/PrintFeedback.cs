@@ -8,14 +8,17 @@ public partial class FeedbackGenerator
         Console.WriteLine("---------------------------------------------------");
         for (int i = 0; i < guess.Length; i++)
         {
+            //green color for letter G
             if (feedback[i] == 'G')
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
+            //yellow color for letter Y
             else if (feedback[i] == 'Y')
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
+            //red color for letter X
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;

@@ -78,6 +78,7 @@ public class Game
                             score = score + 5;
                         }
                     }
+                    //if won break the loop
                     if (guessed_word == secretWord)
                     {
                         won = true;
